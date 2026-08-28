@@ -89,6 +89,10 @@ Browser (Renders Profile View)
 7. **Response**: The controller issues an HTTP redirect response to the student profile route (`students.show`), attaching a success session flash message (`Student registered successfully!`).
 8. **Browser**: The client browser receives the redirect response, fetches the profile view, and renders the registered student details along with their uploaded profile picture.
 
+### Laravel Request Lifecycle Diagram
+
+![Laravel Request Lifecycle Diagram](week04-student-registration/documentation/Diagram.jpg)
+
 ---
 
 ## 5. Validation Rules

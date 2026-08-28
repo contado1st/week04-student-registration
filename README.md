@@ -203,7 +203,7 @@ Display Errors  Format Names & Upload Profile
 
 ### Registration Form
 
-![Registration Form](week04-student-registration/Screenshots/student-registration.png)
+![Registration Form](week04-student-registration/screenshots/student-registration.png)
 
 The registration form provides a responsive interface styled with Tailwind CSS where students enter personal details, contact information, academic choices, and upload an official profile picture.
 
@@ -211,7 +211,7 @@ The registration form provides a responsive interface styled with Tailwind CSS w
 
 ### Validation Errors
 
-![Validation Errors](week04-student-registration/Screenshots/validation-errors.png)
+![Validation Errors](week04-student-registration/screenshots/validation-errors.png)
 
 The application enforces real-time server-side validation. If a submission fails (e.g., duplicate student ID, missing fields, single-letter middle names, or invalid image uploads), the form reloads with error messages highlighting the invalid inputs while retaining previous entries.
 
@@ -219,7 +219,7 @@ The application enforces real-time server-side validation. If a submission fails
 
 ### Successful Registration & Flash Notification
 
-![Successful Registration](week04-student-registration/Screenshots/student-sucessfully-created.png)
+![Successful Registration](week04-student-registration/screenshots/student-sucessfully-created.png)
 
 Upon successful validation and insertion into the database, the controller redirects to the student profile showcase page accompanied by a success flash notification banner.
 
@@ -227,7 +227,7 @@ Upon successful validation and insertion into the database, the controller redir
 
 ### Uploaded Profile Picture & Profile Showcase
 
-![Uploaded Profile Picture](week04-student-registration/Screenshots/Profile.png)
+![Uploaded Profile Picture](week04-student-registration/screenshots/Profile.png)
 
 The student profile view renders the newly registered student's transformed data alongside their uploaded profile image retrieved via Laravel's public storage disk link.
 
@@ -235,7 +235,7 @@ The student profile view renders the newly registered student's transformed data
 
 ### Student Directory Page
 
-![Student Directory](week04-student-registration/Screenshots/Student-list.png)
+![Student Directory](week04-student-registration/screenshots/Student-list.png)
 
 A dedicated database directory view listing all registered students in a formatted table with quick search capabilities, profile thumbnails, and direct links to individual profile cards.
 
@@ -243,7 +243,7 @@ A dedicated database directory view listing all registered students in a formatt
 
 ### Database Table Records
 
-![Database Records](week04-student-registration/Screenshots/Database-sucessfully-working.png)
+![Database Records](week04-student-registration/screenshots/Database-sucessfully-working.png)
 
 The underlying MySQL `students` table verifying that input formatting rules (auto-uppercasing and `A. (FULLNAME)` middle name transformation) were successfully executed before storage.
 
@@ -251,7 +251,7 @@ The underlying MySQL `students` table verifying that input formatting rules (aut
 
 ### VS Code Project Structure
 
-![Project Structure](week04-student-registration/Screenshots/Data-Structure.png)
+![Project Structure](week04-student-registration/screenshots/Data-Structure.png)
 
 The project directory structure in Visual Studio Code showing the organization of Controllers, Models, Blade views, Migrations, and documentation files.
 

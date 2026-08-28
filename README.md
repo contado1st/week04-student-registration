@@ -161,4 +161,40 @@ The system relies on a MySQL relational database named `week04_student_registrat
 
 ### Entity Relationship Diagram (ERD)
 
-![Student Database ER Diagram](documentation/Database_ERD.png)
+![Student Database ER Diagram](week04-student-registration/documentation/Database_ERD.png)
+
+---
+
+## 7. Registration Flowchart
+
+The student registration process models the conditional execution logic enforced by Laravel upon form submission. The application validates input integrity, executes data normalization, handles profile image uploads, creates database records, and routes the user accordingly.
+
+### Process Flow
+
+```text
+User Opens Registration Page
+          ↓
+     Fill Out Form
+          ↓
+   Submit Registration
+          ↓
+   Laravel Validation
+          ↓
+      Valid Data?
+       ↙       ↘
+     NO         YES
+     ↓           ↓
+Display Errors  Format Names & Upload Profile
+                 ↓
+           Save to Database
+                 ↓
+          Success Message
+                 ↓
+        Student Profile Page
+```
+
+### Flowchart 
+
+![Flowchart](week04-student-registration/documentation/Flowchart.png)
+
+---

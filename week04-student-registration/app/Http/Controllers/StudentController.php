@@ -21,8 +21,9 @@ class StudentController extends Controller
             'first_name'     => 'required|string|max:100',
             'middle_name'    => 'nullable|string|max:100',
             'last_name'      => 'required|string|max:100',
+            'suffix'         => 'nullable|string|max:10',
             'email'          => 'required|email|unique:students,email',
-            'mobile_number'  => 'required|numeric',
+            'mobile_number'  => 'required|numeric|digits_between:1,12',
             'date_of_birth'  => 'required|date',
             'gender'         => 'required',
             'program'        => 'required',
@@ -30,6 +31,28 @@ class StudentController extends Controller
             'address'        => 'required|string',
             'profile_picture'=> 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        // Convert Names to Uppercase
+        $validated['first_name'] = strtoupper($validated['first_name']);
+        $validated['last_name']  = strtoupper($validated['last_name']);
+        
+        if (!empty($validated['suffix'])) {
+            $validated['suffix'] = strtoupper($validated['suffix']);
+        }
+
+        // Format Middle Name: e.g., "Agojo" becomes "A. (AGOJO)"
+        if (!empty($validated['middle_name'])) {
+            $cleanMiddle = trim($validated['middle_name']);
+            $initial = strtoupper(substr($cleanMiddle, 0, 1));
+            $fullUpper = strtoupper($cleanMiddle);
+
+            // Format as initial if short input, otherwise create "A. (AGOJO)" format
+            if (strlen(str_replace('.', '', $cleanMiddle)) <= 1) {
+                $validated['middle_name'] = $initial . '.';
+            } else {
+                $validated['middle_name'] = "{$initial}. ({$fullUpper})";
+            }
+        }
 
         // Handle profile picture file upload
         if ($request->hasFile('profile_picture')) {

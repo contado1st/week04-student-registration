@@ -339,3 +339,19 @@ Allowing users to upload files to a web server introduces significant security v
 
 ### How Registration Systems are Used in Real-World Enterprise Software
 In enterprise software architecture, registration systems serve as the core entry gateway for digital identity management, user onboarding, and access control. Whether in academic institutions, healthcare networks, financial platforms, or corporate HR systems, registration modules capture initial user profiles that feed into downstream operational systems. The design patterns practiced in this project—such as form processing, server-side validation, relational database insertion, flash feedback, and media storage—represent fundamental capabilities required in enterprise-level software engineering.
+
+---
+
+## 12. References
+
+Laravel. (n.d.). *Laravel documentation*. https://laravel.com/docs.
+
+MDN Web Docs. (n.d.). *MDN Web Docs*. https://developer.mozilla.org/.
+
+MySQL. (n.d.). *MySQL documentation*. https://dev.mysql.com/doc/.
+
+PHP. (n.d.). *PHP documentation*. https://www.php.net/docs.php.
+
+Tailwind CSS. (n.d.). *Tailwind CSS documentation*. https://tailwindcss.com/docs.
+
+----

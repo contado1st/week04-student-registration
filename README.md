@@ -262,3 +262,61 @@ The project directory structure in Visual Studio Code showing the organization o
 ![Terminal Output](week04-student-registration/screenshots/Artisan-serve.png)
 
 The terminal output displaying active local development execution using `php artisan serve` alongside migration execution logs.
+
+---
+
+## 9. Problems Encountered
+
+During the development and testing of the Student Registration System, three primary technical challenges were encountered:
+
+### Problem 1 – Missing Database Schema Column Mismatch
+When testing form submissions after adding the optional generational suffix field, the application threw a database exception:  
+`SQLSTATE[42S22]: Column not found: 1054 Unknown column 'suffix' in 'field list'`.  
+This occurred because the `suffix` field was implemented in the Blade template and controller validation logic before updating the database migration file.
+
+### Problem 2 – Single-Letter Middle Initial Validation Failure
+Allowing users to enter single-letter middle initials (e.g., "A" or "A.") caused logic failures in the server-side name normalization routine. The transformation code expected a complete middle name string (e.g., "Agojo") to extract both the leading initial and full uppercase text into the standard format `A. (AGOJO)`. Single-letter entries broke the string parsing logic and resulted in redundant outputs like `A. (A)`.
+
+### Problem 3 – Profile Picture 404 Display Error (Missing Storage Link)
+Although profile pictures were successfully validated and saved inside `storage/app/public/profile_pictures/`, the browser failed to display the uploaded images on the student profile page, returning broken image icons and 404 HTTP errors.
+
+---
+
+## 10. Solutions
+
+The following technical solutions were implemented to resolve the encountered problems:
+
+### Solution 1 – Schema Migration Update & Refresh
+The database migration file (`database/migrations/xxxx_xx_xx_xxxxxx_create_students_table.php`) was updated to explicitly define the nullable `suffix` column:
+```php
+$table->string('suffix')->nullable();
+```
+The database schema was then synchronized with the updated controller attributes by re-running the migration command:
+```Bash
+php artisan migrate:fresh
+```
+
+### Solution 2 – Enforcing Minimum Length & Regex Validation Rules
+To reject single-letter initial entries and require full middle names, a minimum length constraint (`min:2`) and a regular expression pattern (`regex:/^[a-zA-Z\s]{2,}$/`) were added to the `middle_name ` validation array in `StudentController.php`:
+```PHP
+'middle_name' => 'nullable|string|min:2|max:100|regex:/^[a-zA-Z\s]{2,}$/',
+```
+
+Custom validation error messages were also registered to provide clear user feedback:
+```PHP
+'middle_name.min'   => 'Please enter your full middle name, not a single letter initial.',
+'middle_name.regex' => 'Middle name must contain at least two letters.',
+```
+
+### Solution 3 – Creating the Storage Symbolic Link
+To expose files stored inside `storage/app/public` to the web server's public root, the Artisan storage link command was executed:
+```Bash
+php artisan storage:link
+```
+
+This established a symbolic link from `public/storage` to `storage/app/public`, enabling the application to render uploaded student profile pictures dynamically using:
+```HTML
+<img src="{{ asset('storage/' . $student->profile_picture) }}" alt="Profile Picture">
+```
+
+---

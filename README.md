@@ -1,6 +1,7 @@
 # Student Registration System
 
 ## ITST 302 – Client-Server Technologies
+**Course:** Bachelor of Science in Information Technology (BSIT) 
 ### Week 4 Laboratory Activity – Mini Project 03
 
 A Laravel-based Student Registration System that enables students to register their information online, upload a profile picture, and securely store their information in a MySQL database[cite: 1].

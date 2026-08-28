@@ -12,21 +12,21 @@ return new class extends Migration
     public function up(): void
     {
     Schema::create('students', function (Blueprint $table) {
-        $table->id();
-        $table->string('student_id')->unique();
-        $table->string('first_name');
-        $table->string('middle_name')->nullable();
-        $table->string('last_name');
-        $table->string('suffix')->nullable();
-        $table->string('email')->unique();
-        $table->string('mobile_number');
-        $table->date('date_of_birth');
-        $table->string('gender');
-        $table->string('program');
-        $table->string('year_level');
-        $table->text('address');
-        $table->string('profile_picture');
-        $table->timestamps();
+    $table->id();
+    $table->string('student_id')->unique();
+    $table->string('first_name');
+    $table->string('middle_name')->nullable();
+    $table->string('last_name');
+    $table->string('suffix')->nullable(); // <-- Ensure this column is present
+    $table->string('email')->unique();
+    $table->string('mobile_number');
+    $table->date('date_of_birth');
+    $table->string('gender');
+    $table->string('program');
+    $table->string('year_level');
+    $table->text('address');
+    $table->string('profile_picture');
+    $table->timestamps();
         });
     }
 

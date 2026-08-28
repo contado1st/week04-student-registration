@@ -19,7 +19,7 @@ class StudentController extends Controller
         $validated = $request->validate([
             'student_id'     => 'required|unique:students,student_id',
             'first_name'     => 'required|string|max:100',
-            'middle_name'    => 'nullable|string|max:100',
+            'middle_name'    => 'nullable|string|min:2|max:100|regex:/^[a-zA-Z\s]{2,}$/',
             'last_name'      => 'required|string|max:100',
             'suffix'         => 'nullable|string|max:10',
             'email'          => 'required|email|unique:students,email',
@@ -30,6 +30,9 @@ class StudentController extends Controller
             'year_level'     => 'required',
             'address'        => 'required|string',
             'profile_picture'=> 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'middle_name.min'   => 'Please enter your full middle name, not a single letter initial.',
+            'middle_name.regex' => 'Middle name must contain at least two letters (no periods or single characters).',
         ]);
 
         // Convert Names to Uppercase
@@ -46,12 +49,7 @@ class StudentController extends Controller
             $initial = strtoupper(substr($cleanMiddle, 0, 1));
             $fullUpper = strtoupper($cleanMiddle);
 
-            // Format as initial if short input, otherwise create "A. (AGOJO)" format
-            if (strlen(str_replace('.', '', $cleanMiddle)) <= 1) {
-                $validated['middle_name'] = $initial . '.';
-            } else {
-                $validated['middle_name'] = "{$initial}. ({$fullUpper})";
-            }
+            $validated['middle_name'] = "{$initial}. ({$fullUpper})";
         }
 
         // Handle profile picture file upload

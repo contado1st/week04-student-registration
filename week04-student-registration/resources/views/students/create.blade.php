@@ -37,7 +37,8 @@
 
             <div>
                 <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Middle Name</label>
-                <input type="text" name="middle_name" value="{{ old('middle_name') }}" placeholder="e.g. Agojo" oninput="this.value = this.value.toUpperCase()" class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-2.5 text-zinc-100 uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                <input type="text" name="middle_name" minlength="2" value="{{ old('middle_name') }}" placeholder="e.g. CRUZ" oninput="this.value = this.value.toUpperCase()" class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-2.5 text-zinc-100 uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                @error('middle_name') <span class="text-red-400 text-xs mt-1 block">{{ $message }}</span> @enderror
             </div>
 
             <div>
@@ -52,8 +53,12 @@
                     <option value="" class="bg-zinc-900">None</option>
                     <option value="JR." {{ old('suffix') == 'JR.' ? 'selected' : '' }} class="bg-zinc-900">Jr.</option>
                     <option value="SR." {{ old('suffix') == 'SR.' ? 'selected' : '' }} class="bg-zinc-900">Sr.</option>
+                    <option value="I" {{ old('suffix') == 'I' ? 'selected' : '' }} class="bg-zinc-900">I</option>
+                    <option value="II" {{ old('suffix') == 'II' ? 'selected' : '' }} class="bg-zinc-900">II</option>
                     <option value="III" {{ old('suffix') == 'III' ? 'selected' : '' }} class="bg-zinc-900">III</option>
                     <option value="IV" {{ old('suffix') == 'IV' ? 'selected' : '' }} class="bg-zinc-900">IV</option>
+                    <option value="V" {{ old('suffix') == 'V' ? 'selected' : '' }} class="bg-zinc-900">V</option>
+                    <option value="VI" {{ old('suffix') == 'VI' ? 'selected' : '' }} class="bg-zinc-900">VI</option>
                 </select>
             </div>
         </div>

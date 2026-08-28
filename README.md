@@ -36,3 +36,23 @@ In enterprise application architecture, registration systems serve as the core e
 * **Central Point of Data Intake**: Foundational across multiple enterprise domains, including academic portals (student enrollment), corporate HR suites (employee onboarding), healthcare systems (patient registration), and banking platforms (KYC registration).
 * **Enterprise Module Integration**: Feeds validated identity records into downstream organizational modules such as authentication systems, access control, billing, course scheduling, and analytics.
 * **Regulatory & Audit Compliance**: Ensures that all collected data adheres strictly to organizational business logic, database structural standards, and privacy requirements right from the moment of intake.
+
+---
+
+## 3. Objectives
+
+The primary objectives of this project are:
+
+* Develop a responsive, modern student registration interface using Laravel Blade templates and Tailwind CSS.
+* Process client HTTP requests using dedicated methods in `StudentController`.
+* Implement robust server-side validation rules and data transformation logic (auto-uppercasing, custom middle name formatting, and 12-digit mobile constraints).
+* Prevent duplicate entries using unique validation constraints on primary identifiers such as Student ID and Email.
+* Process, validate, and securely store student profile pictures using Laravel Storage and public disk symbolic linking.
+* Display dynamic field-level validation errors and flash notifications upon successful form submission.
+* Format and store structured student records into a relational MySQL database schema.
+* Display registered student details through a dynamic student profile view and a centralized student directory page.
+* Understand and apply the Laravel Request Lifecycle during form submission and file handling.
+* Apply version control practices using Git and GitHub following Conventional Commits.
+* Document the complete software development process following enterprise documentation standards.
+
+---

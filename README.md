@@ -161,4 +161,4 @@ The system relies on a MySQL relational database named `week04_student_registrat
 
 ### Entity Relationship Diagram (ERD)
 
-![Student Database ER Diagram](documentation/Database_ERD.png)
+![Student Database ER Diagram](week04-student-registration/documentation/Database_ERD.png)

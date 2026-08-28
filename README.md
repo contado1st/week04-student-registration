@@ -259,6 +259,6 @@ The project directory structure in Visual Studio Code showing the organization o
 
 ### Terminal Execution & Server Output
 
-![Terminal Output](week04-student-registration/Screenshots/Artisan-serve.png)
+![Terminal Output](week04-student-registration/screenshots/Artisan-serve.png)
 
 The terminal output displaying active local development execution using `php artisan serve` alongside migration execution logs.

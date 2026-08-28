@@ -7,6 +7,27 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    // Display all registered students
+    public function index(Request $request)
+    {
+        $query = Student::query();
+
+        // Optional search filter by name, student_id, or program
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('student_id', 'like', "%{$search}%")
+                  ->orWhere('first_name', 'like', "%{$search}%")
+                  ->orWhere('last_name', 'like', "%{$search}%")
+                  ->orWhere('program', 'like', "%{$search}%");
+            });
+        }
+
+        $students = $query->latest()->paginate(10);
+
+        return view('students.index', compact('students'));
+    }
+
     // Display the registration form
     public function create()
     {

@@ -56,8 +56,11 @@
         </div>
 
         <!-- Action Button -->
-        <div class="mt-8 pt-6 border-t border-zinc-800 flex justify-end">
-            <a href="{{ route('students.create') }}" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold text-xs tracking-wider uppercase py-3 px-6 rounded-lg transition-all border border-zinc-700">
+        <div class="mt-8 pt-6 border-t border-zinc-800 flex justify-between items-center">
+            <a href="{{ route('students.index') }}" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-semibold text-xs tracking-wider uppercase py-3 px-6 rounded-lg transition-all border border-zinc-700">
+                &larr; Back to Student Directory
+            </a>
+            <a href="{{ route('students.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs tracking-wider uppercase py-3 px-6 rounded-lg shadow-lg shadow-blue-600/20 transition-all">
                 + Register Another Student
             </a>
         </div>

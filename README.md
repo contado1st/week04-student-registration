@@ -56,3 +56,35 @@ The primary objectives of this project are:
 * Document the complete software development process following enterprise documentation standards.
 
 ---
+
+## 4. Laravel Request Lifecycle
+
+The student registration process strictly follows the Laravel Request Lifecycle to handle HTTP requests, process input data, execute transformations, and return responses:
+
+```text
+Browser (User Submits Form)
+          ↓
+     Route (routes/web.php)
+          ↓
+  Controller (StudentController@store)
+          ↓
+Validation ($request->validate())
+          ↓
+    Model (Student::create())
+          ↓
+  Database (MySQL Insertion)
+          ↓
+   Response (Redirect with Flash)
+          ↓
+Browser (Renders Profile View)
+```
+### Process Explanation
+
+1. **Browser**: The student completes the online registration form and submits it via an HTTP `POST` request to `/students`.
+2. **Route**: The Laravel router (`routes/web.php`) intercepts the incoming `POST` request and delegates execution to `StudentController@store`.
+3. **Controller**: The `StudentController` receives the incoming `Illuminate\Http\Request` object containing form inputs, dropdown selections, and the uploaded file payload.
+4. **Validation**: The `$request->validate()` method executes server-side validation. If validation fails, Laravel interrupts execution and automatically redirects back to the form with saved input data and field error messages.
+5. **Data Transformation & Model**: Upon validation success, name fields are transformed to uppercase, full middle names are formatted to `A. (FULLNAME)` format, and uploaded images are saved to `storage/app/public/profile_pictures`. The `Student` Eloquent model receives the sanitized payload array.
+6. **Database**: The Eloquent ORM translates the model operation into a SQL `INSERT` query, writing the record to the `students` table in the MySQL database.
+7. **Response**: The controller issues an HTTP redirect response to the student profile route (`students.show`), attaching a success session flash message (`Student registered successfully!`).
+8. **Browser**: The client browser receives the redirect response, fetches the profile view, and renders the registered student details along with their uploaded profile picture.

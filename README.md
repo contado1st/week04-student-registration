@@ -198,3 +198,67 @@ Display Errors  Format Names & Upload Profile
 ![Flowchart](week04-student-registration/documentation/Flowchart.png)
 
 ---
+
+## 8. Screenshots
+
+### Registration Form
+
+![Registration Form](week04-student-registration/Screenshots/student-registration.png)
+
+The registration form provides a responsive interface styled with Tailwind CSS where students enter personal details, contact information, academic choices, and upload an official profile picture.
+
+---
+
+### Validation Errors
+
+![Validation Errors](week04-student-registration/Screenshots/validation-errors.png)
+
+The application enforces real-time server-side validation. If a submission fails (e.g., duplicate student ID, missing fields, single-letter middle names, or invalid image uploads), the form reloads with error messages highlighting the invalid inputs while retaining previous entries.
+
+---
+
+### Successful Registration & Flash Notification
+
+![Successful Registration](week04-student-registration/Screenshots/student-sucessfully-created.png)
+
+Upon successful validation and insertion into the database, the controller redirects to the student profile showcase page accompanied by a success flash notification banner.
+
+---
+
+### Uploaded Profile Picture & Profile Showcase
+
+![Uploaded Profile Picture](week04-student-registration/Screenshots/Profile.png)
+
+The student profile view renders the newly registered student's transformed data alongside their uploaded profile image retrieved via Laravel's public storage disk link.
+
+---
+
+### Student Directory Page
+
+![Student Directory](week04-student-registration/Screenshots/Student-list.png)
+
+A dedicated database directory view listing all registered students in a formatted table with quick search capabilities, profile thumbnails, and direct links to individual profile cards.
+
+---
+
+### Database Table Records
+
+![Database Records](week04-student-registration/Screenshots/Database-sucessfully-working.png)
+
+The underlying MySQL `students` table verifying that input formatting rules (auto-uppercasing and `A. (FULLNAME)` middle name transformation) were successfully executed before storage.
+
+---
+
+### VS Code Project Structure
+
+![Project Structure](week04-student-registration/Screenshots/Data-Structure.png)
+
+The project directory structure in Visual Studio Code showing the organization of Controllers, Models, Blade views, Migrations, and documentation files.
+
+---
+
+### Terminal Execution & Server Output
+
+![Terminal Output](week04-student-registration/Screenshots/Artisan-serve.png)
+
+The terminal output displaying active local development execution using `php artisan serve` alongside migration execution logs.

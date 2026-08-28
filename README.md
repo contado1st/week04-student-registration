@@ -88,3 +88,77 @@ Browser (Renders Profile View)
 6. **Database**: The Eloquent ORM translates the model operation into a SQL `INSERT` query, writing the record to the `students` table in the MySQL database.
 7. **Response**: The controller issues an HTTP redirect response to the student profile route (`students.show`), attaching a success session flash message (`Student registered successfully!`).
 8. **Browser**: The client browser receives the redirect response, fetches the profile view, and renders the registered student details along with their uploaded profile picture.
+
+---
+
+## 5. Validation Rules
+
+The Student Registration System enforces server-side validation using Laravel's built-in validation engine prior to processing database operations or storing uploaded files.
+
+### Validation Matrix
+
+| Field | Rule / Constraint | Description & Purpose |
+| :--- | :--- | :--- |
+| `student_id` | `required\|unique:students,student_id` | Prevents blank submissions and ensures no two students share the same institutional identification number. |
+| `first_name` | `required\|string\|max:100` | Ensures student first name is present, textual, and strictly under 100 characters. |
+| `middle_name` | `nullable\|string\|min:2\|max:100\|regex:/^[a-zA-Z\s]{2,}$/` | Optional field. Enforces a 2-character minimum and regex string check to reject single-letter initials (e.g., "A" or "A.") in favor of full middle names. |
+| `last_name` | `required\|string\|max:100` | Requires student surname input within standard length constraints. |
+| `suffix` | `nullable\|string\|max:10` | Optional selection (`JR.`, `SR.`, `I` – `VI`) to capture generational suffixes accurately. |
+| `email` | `required\|email\|unique:students,email` | Validates standard RFC email syntax and prevents duplicate account registration under the same email address. |
+| `mobile_number` | `required\|numeric\|digits_between:1,12` | Guarantees numeric-only input and limits total digits strictly to a maximum of 12 numbers. |
+| `date_of_birth` | `required\|date` | Validates that the input adheres to a valid calendar date format. |
+| `gender` | `required` | Ensures a gender selection is recorded from the form drop-down list. |
+| `program` | `required` | Captures the enrolled degree program. |
+| `year_level` | `required` | Captures academic year level (`1st Year` to `4th Year`). |
+| `address` | `required\|string` | Collects complete physical residential location information. |
+| `profile_picture` | `required\|image\|mimes:jpg,jpeg,png\|max:2048` | Restricts upload files strictly to valid image formats (`.jpg`, `.jpeg`, `.png`) with a maximum allowed file size of 2048 KB (2 MB). |
+
+---
+
+### Importance of Validation Rules
+
+* **Required Field Validation**: Ensures completeness of student personnel files by rejecting incomplete web forms before SQL execution.
+* **Unique Constraints**: Prevents data corruption and identity duplication across core system identifiers (`student_id` and `email`).
+* **Format & Pattern Validation**: Enforces institutional naming rules (such as full middle name input over single initials) and clean digit-only phone records.
+* **File Upload Constraints**: Protects application storage space, guards against malicious non-image file uploads (e.g., `.php` or executable scripts), and maintains web rendering performance.
+
+---
+
+## 6. Database Design
+
+The system relies on a MySQL relational database named `week04_student_registration` with a single primary table named `students`.
+
+### Table Schema: `students`
+
+| Column | Data Type | Key / Constraint | Nullable | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | `BIGINT` | Primary Key, Auto Increment | No | Unique internal database record ID |
+| `student_id` | `VARCHAR(255)` | Unique Index | No | Official student identification number |
+| `first_name` | `VARCHAR(255)` | None | No | Student first name (stored in uppercase) |
+| `middle_name` | `VARCHAR(255)` | None | Yes | Formatted middle name: `INITIAL. (FULLNAME)` |
+| `last_name` | `VARCHAR(255)` | None | No | Student surname (stored in uppercase) |
+| `suffix` | `VARCHAR(255)` | None | Yes | Generational name suffix (e.g., `JR.`, `III`) |
+| `email` | `VARCHAR(255)` | Unique Index | No | Student email address |
+| `mobile_number` | `VARCHAR(255)` | None | No | Numeric mobile number (max 12 digits) |
+| `date_of_birth` | `DATE` | None | No | Birth date record |
+| `gender` | `VARCHAR(255)` | None | No | Gender identity classification |
+| `program` | `VARCHAR(255)` | None | No | Degree program / Academic major |
+| `year_level` | `VARCHAR(255)` | None | No | Enrolled academic year |
+| `address` | `TEXT` | None | No | Full residential address details |
+| `profile_picture` | `VARCHAR(255)` | None | No | Public storage file path string for image |
+| `created_at` | `TIMESTAMP` | None | Yes | Timestamp when the record was created |
+| `updated_at` | `TIMESTAMP` | None | Yes | Timestamp when the record was last modified |
+
+---
+
+### Primary Key & Unique Constraints
+
+* **Primary Key**: `id` serves as the surrogate primary key for unique row identification.
+* **Unique Key 1**: `student_id` is indexed as unique to ensure institutional ID integrity.
+* **Unique Key 2**: `email` is indexed as unique to prevent duplicate user account creation.
+
+---
+
+### Entity Relationship Diagram (ERD)
+
+![Student Database ER Diagram](documentation/Database_ERD.png)
